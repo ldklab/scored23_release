@@ -22,7 +22,7 @@ This file executes the ASTParser.py file that loops through the dataset.
 
 #### 1. ASTParser.py 
 
-<p>- Edit the MongoDB database details as per your own setup. The default settings are applied for local default MongoDB database instance.
+- Edit the MongoDB database details as per your own setup. The default settings are applied for local default MongoDB database instance.
 
 #### 2. ASTLooper.py
 
