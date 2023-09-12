@@ -61,8 +61,47 @@ This file creates the empty dictionaries for bi,tri and quad grams and save them
 
         python3 NGramEmptyPair.py /path/to/destination/folder
 
+- Outputs 3 empty dictionary files for each bi, tri and quad combination
 
+#### 5. DictOfNodes.py
 
+- Takes a destination folder path as an input argument. Create 
+
+- To run the file: 
+
+        python3 DictOfNodes.py /path/to/destination/folder
+
+#### 6. BigramDictUpdate.py
+
+- Takes 2 inputs to create a Bigram Dictionary with frequencies of each pair combination in the AST. (i) path to root folder that contains the ASTs created in step # 3 (ii) path to destination folder
+
+- Need to change on line 99 ```pathToEmptyDict``` variable in the code and provide the absolute path to the empty dictionary pickle that was created for bigram ```dictOfBigram.pickle```
+
+- Need to change on line 116 ```DictOfNodes.py``` path in the code. 
+
+- Create a new folder **ASTDictionaries** in the **Processed** folder and give it as an input argument
+
+- To run the file:
+
+        python3 BigramDictUpdate.py /path/to/root/folder/with/ASTs /path/to/destination/folder/ASTDictionaries
+
+- This will output folder named **Bigram** containing pickle files with updated frequency for each pair combination
+
+#### 7. TrigramDictUpdate.py
+
+- Repeat the same steps as in step # 6. 
+
+- Provide the path to Trigram Dictionary ```dictOfTrigram.pickle```
+
+- This will output folder named **Trigram** containing pickle files with updated frequency for each pair combination
+
+#### 7. QuadgramDictUpdate.py
+
+- Repeat the same steps as in step # 6. 
+
+- Provide the path to Trigram Dictionary ```dictOfQuadgram.pickle```
+
+- This will output folder named **Trigram** containing pickle files with updated frequency for each pair combination
 
 
 ## Prerequisites 
