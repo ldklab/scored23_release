@@ -6,8 +6,7 @@ This repository contains the code for the **Distinguishing AI and Human-Generate
 
 1. Parsing C/C++ code into ASTs
 2. Compute N-gram vectors
-3. Dictionary
-4. 
+3. N-gram dictionaries
 
 ## Files: 
 
