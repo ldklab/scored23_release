@@ -15,7 +15,8 @@ This repository contains the code for the **Distinguishing AI and Human-Generate
  
 1. Download and install "Networkx" package
 2. Download and install "TreeSitter" package
-3. Create a new folder "Processed" in the same directory as the "ASTAnalysis" folder. 
+3. Create a new folder "Processed" in the same directory as the "ASTAnalysis" folder.
+4. Download and install MongoDB local instance.
 
 
 ## Files: 
