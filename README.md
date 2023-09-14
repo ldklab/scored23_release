@@ -7,6 +7,9 @@ This repository contains the code for the **Distinguishing AI and Human-Generate
 1. Parsing C/C++ code into ASTs
 2. Compute N-gram vectors
 3. N-gram dictionaries
+4. Binary Classification based on Syntactic features
+5. Binary Classificaiton based on Lexical features
+6. Binary Classification based on Syntactic and Lexical (combined) features
 
 ## Files: 
 
