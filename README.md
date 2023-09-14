@@ -34,6 +34,38 @@ This will create pickle files with all the extracted node types from the ASTs fo
 #### 4. NGramEmptyPair.py
 This file creates the empty dictionaries for bi,tri and quad grams and save them to a pickle file at the desired destination folder.
 
+#### 5. DictOfNodes.py
+This file creates a dictionary with the "Key" values as all the node types found within the code and values "Values" of those keys are the generalized node types. You can change the generalized node types from within this file. 
+
+#### 6. BigramDictUpdate.py & TrigramDictUpdate.py & QuadgramDictUpdate.py
+This will update the empty dictionary for each code file in source dataset based on the n-gram value (2,3,4). 
+
+#### 7. BigramVectorCreation.py & TrigramVectorCreation.py & QuadgramVectorCreation.py
+These files will create the normalized vectors for the each file that was created by the (Bigram/Trigram/Quadgram)DictUpdate.py files. 
+
+#### 8. BiStratClassification.py & TriStratClassification.py & QuadStratClassification.py 
+These files will apply the stratified binary classification using RFC, KNN, XGB & SVM on the created normalized vectors for syntactic features.  
+
+#### 9. LexicalLooper.py
+This file loops through the source dataset files and executes the LexicalParse.py for each file. 
+
+#### 10. LeixcalParse.py
+This file parses the source code file and creates features based on the lexical elements within the file. 
+
+#### 11. LexicalClassification.py
+This file will apply the stratified binary classification using RFC, KNN, XGB & SVM on the created normalized vectors for lexical features.  
+
+#### 11. ASTandLexicalLooper.py 
+This file loops through the source dataset files and executes the ASTandLexicalParse.py 
+
+#### 12. ASTandLexicalParse.py
+This file parses the source code files in the syntactic and lexical features and save those vectors in MongoDB. 
+
+#### 13. ASTandLexicalClassification.py
+This file applies the stratified binary classification using RFC, KNN, XGB & SVM on the created normalized vectors for syntactic and lexical features. 
+
+
+
 ## How To Run: 
 
 #### 1. ASTParser.py 
