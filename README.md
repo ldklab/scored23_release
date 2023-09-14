@@ -17,6 +17,7 @@ This repository contains the code for the **Distinguishing AI and Human-Generate
 2. Download and install "TreeSitter" package
 3. Create a new folder "Processed" in the same directory as the "ASTAnalysis" folder.
 4. Download and install MongoDB local instance.
+5. Download the ASTAnalysis folder. This contains the code files and the "Dataset" folder. 
 
 
 ## Files: 
