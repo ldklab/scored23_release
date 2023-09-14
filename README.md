@@ -11,6 +11,13 @@ This repository contains the code for the **Distinguishing AI and Human-Generate
 5. Binary Classificaiton based on Lexical features
 6. Binary Classification based on Syntactic and Lexical (combined) features
 
+## Prerequisites 
+ 
+1. Download and install "Networkx" package
+2. Download and install "TreeSitter" package
+3. Create a new folder "Processed" in the same directory as the "ASTAnalysis" folder. 
+
+
 ## Files: 
 
 #### 1. ASTParser.py
@@ -218,15 +225,6 @@ To run the file:
 #### 3. LexicalStratClassification.py
 
 - This will retrieve data from MongoDB Lexical Vector collection and run Classification models on the feature vectors. 
-
-
-
-## Prerequisites 
- 
-1. Download and install "Networkx" package
-2. Download and install "TreeSitter" package
-3. Create a new folder "Processed" in the same directory as the "ASTAnalysis" folder. 
-
 
 
 ## External Tools:
