@@ -30,6 +30,8 @@ This file creates the empty dictionaries for bi,tri and quad grams and save them
 
 #### 2. ASTLooper.py
 
+- This will execute the ASTParse.py file. 
+
 - Run the the file by providing two absolute paths of the below as inputs:
 
     1. Source dataset folder that has 2 folder (i) Control (ii) Autopilot
@@ -95,13 +97,125 @@ This file creates the empty dictionaries for bi,tri and quad grams and save them
 
 - This will output folder named **Trigram** containing pickle files with updated frequency for each pair combination
 
-#### 7. QuadgramDictUpdate.py
+#### 8. QuadgramDictUpdate.py
 
 - Repeat the same steps as in step # 6. 
 
 - Provide the path to Trigram Dictionary ```dictOfQuadgram.pickle```
 
 - This will output folder named **Trigram** containing pickle files with updated frequency for each pair combination
+
+
+## Follow Below Steps For Classification Based on Syntactic + Lexical Features After Step # 8:
+
+#### 9. ASTandLexParse.py
+
+- Edit the MongoDB database details as per your own setup. The default settings are applied for local default MongoDB database instance.
+
+#### 10. ASTandLexLooper.py
+
+- This will execute the ASTandLexParse.py file. 
+
+- Run the the file by providing two absolute paths of the below as inputs:
+
+    1. Absolute path to the Dataset folder
+    2. Absolute path to AST dictionary folder, either Bigram, Trigram or Quadgram that was created in step # 6, 7 & 8 
+
+- To run the file: 
+
+        python3 ASTandLexLooper.py /absolute/path/of/dataset/folder absolute/path/of/dictionary
+
+- Based on the dictionary input file it will create a new Collection in MongoDB. Collection will be named as ```CombinedVectorWith<Bigram/Trigram/Quadgram>```
+
+- Run the file again for N-gram length 3 and 4
+
+#### 11. ASTandLexClassification.py
+
+- Uncomment the appropriate line from line# 27, 28 or 29 to retrieve the vectors from the required MongoDB collection. 
+
+        # mycol = mydb["CombinedVectorWithBigram"]
+        # mycol = mydb["CombinedVectorWithTrigram"]
+        # mycol = mydb["CombinedVectorWithQuadgram"]
+
+- To run the file:
+
+        python3 ASTandLexClassification.py
+
+
+## Follow Below Steps For Classification Based on Syntactic Features Only After Step # 8:
+
+#### 9. BigramVectorCreation.py
+
+- Takes an argument as input to create the normalized vectors for Bigram combination. The path to Bigram source AST folder that was created in step # 6 is the input
+
+- This will output the vector and save in MongoDB under ```ASTBigramVector``` collection
+
+- To run the file:
+
+        python3 BigramVectorCreation.py /path/to/bigram/AST/folder
+
+#### 10. TrigramVectorCreation.py
+
+- Repeat same steps as in step # 9
+
+- Provide the path to Trigram source AST folder
+
+- This will output the vector and save in MongoDB under ```ASTTrigramVector```
+
+#### 11. QuadgramVectorCreation.py
+
+- Repeat same steps as in step # 9
+
+- Provide the path to Quadgram source AST folder
+
+- This will output the vector and save in MongoDB under ```ASTQuadgramVector```
+
+#### 12. BiStratClassification.py
+
+- This will retrieve data from MongoDB Bigram Vector collection and run Classification models on the feature vectors. 
+
+- To run the file:
+
+        python3 BiStratClassification.py
+
+#### 13. TriStratClassification.py
+
+- Does the same as step # 12 but for Trigram Vector collection in MongoDb
+
+To run the file:
+
+        python3 TriStratClassification.py
+
+#### 14. QuadStratClassification.py
+
+- Does the same as step # 12 but for Quadgram Vector collection in MongoDb
+
+To run the file:
+
+        python3 QuadStratClassification.py
+
+
+## Follow Below Steps For Classification Based on Lexical Features Only (No Need To Run Steps # 1 - 8):
+
+#### 1. LexicalParse.py 
+
+- Edit the MongoDB database details as per your own setup. The default settings are applied for local default MongoDB database instance.
+
+#### 2. LexicalLooper.py
+
+- Run the file providing the source path to the ```Dataset``` folder
+
+- To run the file: 
+
+        python3 LexicalLooper.py /absolute/path/of/dataset/folder 
+
+- This will execute the LexicalParse.py file create a collection named **LexicalVectors** in MongoDB 
+
+
+#### 3. LexicalStratClassification.py
+
+- This will retrieve data from MongoDB Lexical Vector collection and run Classification models on the feature vectors. 
+
 
 
 ## Prerequisites 
