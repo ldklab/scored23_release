@@ -16,7 +16,7 @@ This repository contains the code for the **Distinguishing AI and Human-Generate
 1. Download and install "Networkx" package
 2. Download and install "TreeSitter" package
 3. Create a new folder "Processed" in the same directory as the "ASTAnalysis" folder.
-4. Download and install MongoDB local instance.
+4. Download and install MongoDB local instance. `docker run -d -p 127.0.0.1:27017:27017 -v <path-to>/data/db mongo:6`
 5. Download the ASTAnalysis folder. This contains the code files and the "Dataset" folder. 
 
 
