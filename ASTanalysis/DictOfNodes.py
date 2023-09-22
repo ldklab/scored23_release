@@ -119,7 +119,6 @@ def createDictionary(destFolder):
         print("unable to create")
 
 
-
 def main():
     cmdparser = argparse.ArgumentParser()
     cmdparser.add_argument(

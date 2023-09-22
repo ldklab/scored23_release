@@ -82,22 +82,30 @@ This file applies the stratified binary classification using RFC, KNN, XGB & SVM
 
 #### 2. ASTLooper.py
 
-- This will execute the ASTParse.py file. 
-
-- Run the the file by providing two absolute paths of the below as inputs:
+- Run the following command, which will execute the ASTParse.py file 
+```bash
+python3 ASTLooper.py /absolute/path/to/ASTanalysis/Dataset absolute/path/of/destination/folder
+```
+- By providing two absolute paths of the below as inputs:
 
     1. Source dataset folder that has 2 folder (i) Control (ii) Autopilot
     2. Destination folder path that will save the ASTs in XML format. Create a new folder **Graphs** in the **Processed** root directory (see prerquisites)
 
-- To run the file: 
-
-        python3 ASTLooper.py /absolute/path/to/ASTanalysis/Dataset absolute/path/of/destination/folder
-
 - This will have 3 outputs:
+  1. Creates a database named **CodeStylometry** in MongoDB 
+  2. Creates a collection named **Graphs** in the **CodeStylometry** database where AST graphs for each file will be saved.
+  3. Saves AST in XML format in the **Graphs** folder created above.
 
-    1. Creates a database named **CodeStylometry** in MongoDB 
-    2. Creates a collection named **Graphs** in the **CodeStylometry** database with AST graphs for each file will be saved
-    3. Saves AST in XML format in the **Graphs** folder created above
+- Follow these steps to double check MongoDB: 
+  1. Connect to MongoDB container (if you are using the container set up): `docker ps`
+  2. Access the running container using `docker exec -it CONTAINER_NAME_OR_ID bash`. You are currently inside the container, run the following commands to inspect the DB:
+     ```bash
+     mongosh
+     use admin
+     show dbs  # you should see the created DB CodeStylometry
+     use CodeStylometry
+     show collections
+     ```
 
 #### 3. CreateNodeTypeSet.py
 
@@ -105,7 +113,9 @@ This file applies the stratified binary classification using RFC, KNN, XGB & SVM
 
 - To run the file:
 
-        python3 CreateNodeTypeSet.py /destination/folder/path
+        python3 CreateNodeTypeSet.py /path/to/NodeType
+
+- The following files/folders `Autopilot,buffer.txt,Control,finalNodeTypes.txt` will be created inside the directory **NodeType**
 
 #### 4. NGramEmptyPair.py
 
@@ -113,21 +123,23 @@ This file applies the stratified binary classification using RFC, KNN, XGB & SVM
 
 - To run the file:
 
-        python3 NGramEmptyPair.py /path/to/destination/folder
+        python3 NGramEmptyPair.py /path/to/EmptyDictionaries
 
-- Outputs 3 empty dictionary files for each bi, tri and quad combination
+- Outputs 3 empty dictionary files (`dictOfBigram.pickle, dictofQuadgram.pickle, dictofTrigram.pickle`) for each bi, tri and quad combination
 
 #### 5. DictOfNodes.py
 
-- Takes a destination folder path as an input argument. Create 
+- Takes a destination folder path as an input argument. Create the directory **DictOfNodes** inside **Processed**
 
 - To run the file: 
 
-        python3 DictOfNodes.py /path/to/destination/folder
+        python3 DictOfNodes.py /path/to/DictOfNodes
+
+- The file `DictOfNodes.pickle` will be created inside the directory **DictOfNodes**
 
 #### 6. BigramDictUpdate.py
 
-- Takes 2 inputs to create a Bigram Dictionary with frequencies of each pair combination in the AST. (i) path to root folder that contains the ASTs created in step # 3 (ii) path to destination folder
+- Takes 2 inputs to create a Bigram Dictionary with frequencies of each pair combination in the AST. (i) path to root folder that contains the ASTs created in step # 3 (i.e., **NodeType**) (ii) path to destination folder
 
 - Need to change on line 99 ```pathToEmptyDict``` variable in the code and provide the absolute path to the empty dictionary pickle that was created for bigram ```dictOfBigram.pickle```
 
@@ -137,7 +149,7 @@ This file applies the stratified binary classification using RFC, KNN, XGB & SVM
 
 - To run the file:
 
-        python3 BigramDictUpdate.py /path/to/root/folder/with/ASTs /path/to/destination/folder/ASTDictionaries
+        python3 BigramDictUpdate.py /path/to/NodeType /path/to/ASTDictionaries
 
 - This will output folder named **Bigram** containing pickle files with updated frequency for each pair combination
 
