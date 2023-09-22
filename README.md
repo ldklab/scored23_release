@@ -13,10 +13,18 @@ This repository contains the code for the **Distinguishing AI and Human-Generate
 
 ## Prerequisites 
  
-1. Download and install "Networkx" package
-2. Download and install "TreeSitter" package
+1. Download required packages using `pip install -r requirements.txt`
+2. Clone and build "TreeSitter" package using the following steps
+```bash
+cd ASTanalysis
+mdkir vendor && cd vendor
+git clone https://github.com/tree-sitter/tree-sitter-cpp
+cd ..
+python builder.py 
+# my-languages.so* file will be created under the folder ASTanalysis/build
+```
 3. Create a new folder "Processed" in the same directory as the "ASTAnalysis" folder.
-4. Download and install MongoDB local instance. `docker run -d -p 127.0.0.1:27017:27017 -v <path-to>/data/db mongo:6`
+4. Download and install MongoDB local instance. `docker run -d -p 127.0.0.1:27017:27017 -v <path-to>/db:/data/db mongo:6`
 5. Download the ASTAnalysis folder. This contains the code files and the "Dataset" folder. 
 
 
@@ -83,7 +91,7 @@ This file applies the stratified binary classification using RFC, KNN, XGB & SVM
 
 - To run the file: 
 
-        python3 ASTLooper.py /absolute/path/of/dataset/folder absolute/path/of/destination/folder
+        python3 ASTLooper.py /absolute/path/to/ASTanalysis/Dataset absolute/path/of/destination/folder
 
 - This will have 3 outputs:
 
