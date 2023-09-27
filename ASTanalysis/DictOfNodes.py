@@ -107,6 +107,11 @@ def createDictionary(destFolder):
         "{": "Bracket",
         "||": "Logical_Operator",
         "}": "Bracket",
+        "NULL":"Null",
+        "character":"Constant_Declarator",
+        "else_clause":"Condition",
+        "string_content":"Statement",
+        "subscript_argument_list":"Definition"
     }
 
     dictPath = os.path.join(destFolder, "DictOfNodes.pickle")
