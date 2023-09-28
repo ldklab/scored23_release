@@ -67,7 +67,7 @@ def main():
     inputArgument = argparse.ArgumentParser()
 
     inputArgument.add_argument(
-        "sourcefolder", help="Add absolute path to the  Dataset folder"
+        "sourcefolder", help="Add absolute path to the Dataset folder"
     )
     inputArgument.add_argument(
         "dictionary",

@@ -94,8 +94,12 @@ def main():
     # Put the path for the Empty Bigram Dictionary file
     # ---------------------------------------------------
     # ---------------------------------------------------
+    current_script_path = os.path.abspath(__file__)
+    # Get the directory containing the current script
+    current_script_directory = os.path.dirname(current_script_path)
+    relative_pathToEmptyDict = "../Processed/EmptyDictionaries/dictofQuadgram.pickle"
 
-    pathToEmptyDict = "/Users/sbukhari/Sandbox/CProgram/Processed/EmptyDictionaries/dictOfQuadgram.pickle"
+    absolute_pathToEmptyDict = os.path.join(current_script_directory, relative_pathToEmptyDict)
 
     # ---------------------------------------------------
     # ---------------------------------------------------
@@ -108,9 +112,10 @@ def main():
     # Put the path for DictOfNodes.py file
     # ---------------------------------------------------
     # ---------------------------------------------------
+    relative_pathToDictOfNodes = "../Processed/DictOfNodes/DictOfNodes.pickle"
 
     with open(
-        "/Users/sbukhari/Sandbox/CProgram/Processed/DictOfNodes.pickle", "rb"
+        os.path.join(current_script_directory, relative_pathToDictOfNodes), "rb"
     ) as inF:
         dictFile = pickle.load(inF)
 
@@ -173,13 +178,13 @@ def main():
     # Update and Create a pickle file for each function in Control Folder
     # ---------------------------------------------------
 
-    funcOfControl(controlfilelist, destPath, pathToEmptyDict, dictFile)
+    funcOfControl(controlfilelist, destPath, absolute_pathToEmptyDict, dictFile)
 
     # ---------------------------------------------------
     # Update and Create a pickle file for each function in Autopilot Folder
     # ---------------------------------------------------
 
-    funcOfAutopilot(autopilotfilelist, destPath, pathToEmptyDict, dictFile)
+    funcOfAutopilot(autopilotfilelist, destPath, absolute_pathToEmptyDict, dictFile)
 
 
 if __name__ == "__main__":
