@@ -1,4 +1,5 @@
 import pymongo
+import argparse
 import pandas as pd
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
@@ -12,13 +13,13 @@ from sklearn.model_selection import (
 from bson.objectid import ObjectId
 
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+# myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 
-mydb = myclient["CodeStylometry"]
+# mydb = myclient["CodeStylometry"]
 
 # mycol = mydb["CombinedVectorWithBigram"]
 # mycol = mydb["CombinedVectorWithTrigram"]
-mycol = mydb["CombinedVectorWithQuadgram"]
+# mycol = mydb["CombinedVectorWithQuadgram"]
 
 
 # ---------------------------------------------------
@@ -55,11 +56,11 @@ def createObjectID(listWithIds):
     # ---------------------------------------------------
 
 
-def createYList(ObjectIDs):
+def createYList(ObjectIDs, mycol):
     y_Predict = []
 
     for invidiualID in ObjectIDs:
-        returnedString = getCodedBy(invidiualID)
+        returnedString = getCodedBy(invidiualID, mycol)
         y_Predict.append(returnedString)
 
     return y_Predict
@@ -69,7 +70,7 @@ def createYList(ObjectIDs):
     # ---------------------------------------------------
 
 
-def getCodedBy(objectId):
+def getCodedBy(objectId, mycol):
     eachRecord = mycol.find_one({"_id": objectId})
     eachOutputString = eachRecord["Coded_By"]
 
@@ -88,11 +89,11 @@ def createYarray(ylist):
     return y
 
 
-def createXList(ObjectIDs):
+def createXList(ObjectIDs, mycol):
     XFull = []
 
     for individualId in ObjectIDs:
-        returnedString = getOutputVector(individualId)
+        returnedString = getOutputVector(individualId, mycol)
         XFull.append(returnedString)
 
     return XFull
@@ -102,7 +103,7 @@ def createXList(ObjectIDs):
     # # ---------------------------------------------------
 
 
-def getOutputVector(individualID):
+def getOutputVector(individualID, mycol):
     eachRecord = mycol.find_one({"_id": individualID})
     eachOutputString = eachRecord["Output_Vector"]
 
@@ -137,7 +138,6 @@ def deletedColumns(Xarray):
     summed_Array = np.sum(Xarray, axis=0)
 
     zeroeth_Index = []
-
     for count, value in enumerate(summed_Array):
         if value == 0.0:
             zeroeth_Index.append(count)
@@ -350,18 +350,19 @@ def classification(X, y):
 
 
 def main():
-    # cmdparser = argparse.ArgumentParser()
-    # cmdparser.add_argument('MongoCollection', help='Provide name for MongoDB Collection')
+    cmdparser = argparse.ArgumentParser()
+    cmdparser.add_argument('MongoCollection', help='Provide name for MongoDB Collection')
 
-    # args = cmdparser.parse_args()
+    args = cmdparser.parse_args()
 
-    # collectionName = args.MongoCollection
+    collectionName = args.MongoCollection
 
-    # myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 
-    # mydb = myclient["CodeStylometry"]
+    mydb = myclient["CodeStylometry"]
 
-    # mycol = mydb[collectionName]
+    mycol = mydb[collectionName]
+
 
     from pymongoarrow.monkey import patch_all
 
@@ -400,7 +401,7 @@ def main():
     # # Create Y list for analysis
     # # ---------------------------------------------------
 
-    yList = createYList(ObjectIDs)
+    yList = createYList(ObjectIDs, mycol)
 
     # # ---------------------------------------------------
     # # Create Y array for analysis
@@ -414,7 +415,7 @@ def main():
     # # Create X list for analysis
     # # ---------------------------------------------------
 
-    xList = createXList(ObjectIDs)
+    xList = createXList(ObjectIDs, mycol)
 
     # # ---------------------------------------------------
     # # Create X array for analysis
